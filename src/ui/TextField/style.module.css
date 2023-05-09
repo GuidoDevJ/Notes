@@ -1,0 +1,23 @@
+.container{
+    width: 100%;
+    height: auto;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.label{
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+.field{
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    padding: 3px;
+    border-radius: 5px;
+    border: .5px solid #000;
+}

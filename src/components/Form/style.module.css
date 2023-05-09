@@ -1,0 +1,23 @@
+.container{
+    background-color:#D4F1F4; 
+    text-align: center;
+}
+.form{
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+.form button{
+    width: 50vw;
+    height: 50px;
+}
+@media (min-width:768px){
+    .form{
+        width: 70%;
+    }
+}
