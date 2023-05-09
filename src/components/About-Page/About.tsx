@@ -1,9 +1,12 @@
 import { Header } from "../Header";
+import { MainLayout } from "../Layout";
 
 const About = () => {
   return (
     <>
-      <Header />
+      <MainLayout>
+        <h1>About Page</h1>
+      </MainLayout>
     </>
   );
 };

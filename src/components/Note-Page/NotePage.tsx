@@ -1,13 +1,77 @@
 import { Title } from "../../ui/Text";
-import { Header } from "../Header";
-import style from "./style.module.css";
+import { CardForm } from "../Cards/Card/index";
+import { CardContainer } from "../Cards/Card-Container";
+
+import { MainLayout } from "../Layout";
+// import style from "./style.module.css";
 const NotePage = () => {
   return (
     <>
-      <Header />
-      <div className={style.container}>
+      <MainLayout>
         <Title as="h1">Notes</Title>
-      </div>
+        <CardContainer>
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+          <CardForm
+            title="Cocinar"
+            text="Esta noche necesito cocinar una pizza"
+          />
+        </CardContainer>
+      </MainLayout>
     </>
   );
 };

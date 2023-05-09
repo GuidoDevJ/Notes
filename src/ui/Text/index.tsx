@@ -32,7 +32,7 @@ const Title = ({ as: Component, children }: any) => {
 
 const Text = styled.p`
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
 `;
 Title.defaultProps = {

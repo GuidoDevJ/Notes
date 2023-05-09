@@ -1,16 +1,19 @@
 .container{
     background-color:#D4F1F4; 
     text-align: center;
+    padding: 10px;
+}
+.container h1{
+    height: 10vh;
 }
 .form{
     margin: 0 auto;
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    padding: 10px;
 }
 .form button{
     width: 50vw;
@@ -18,6 +21,10 @@
 }
 @media (min-width:768px){
     .form{
-        width: 70%;
+        max-width: 50%;
+    }
+
+    .form button{
+        max-width: 40%;
     }
 }
