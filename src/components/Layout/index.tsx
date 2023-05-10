@@ -1,6 +1,6 @@
 import { Header } from "../Header";
 import { styled } from "styled-components";
-import ILayout from "src/interfaces";
+import { ILayout } from "../../interfaces/index";
 
 const DivMain = styled.div`
   width: 80%;

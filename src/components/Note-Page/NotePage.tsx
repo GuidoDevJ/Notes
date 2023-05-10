@@ -1,75 +1,24 @@
 import { Title } from "../../ui/Text";
-import { CardForm } from "../Cards/Card/index";
+import { CardMemo } from "../Cards/Card/index";
 import { CardContainer } from "../Cards/Card-Container";
-
 import { MainLayout } from "../Layout";
-// import style from "./style.module.css";
+import { useGetNotes } from "../../hooks/index";
 const NotePage = () => {
+  const { noteState } = useGetNotes();
+
   return (
     <>
       <MainLayout>
         <Title as="h1">Notes</Title>
         <CardContainer>
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
-          <CardForm
-            title="Cocinar"
-            text="Esta noche necesito cocinar una pizza"
-          />
+          {noteState.map((note: any) => (
+            <CardMemo
+              title={note.title}
+              text={note.content}
+              key={note.id}
+              id={note.id}
+            />
+          ))}
         </CardContainer>
       </MainLayout>
     </>

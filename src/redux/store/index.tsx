@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
+import notesSlice from "../slices/notes/notesSlice";
 // Configurando Persist Store
 const persisConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const persistedReducer = persistReducer(persisConfig, rootReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
+    notes: notesSlice.reducer,
   },
   middleware: [thunk],
 });

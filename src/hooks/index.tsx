@@ -1,9 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ApiService } from "../api/index";
 import { authUser } from "../redux/slices/auth/index";
+import { useEffect } from "react";
+import { addNote } from "../redux/slices/notes/notesSlice";
 
 const baseUrl = "https://backend-notes-liart.vercel.app/";
 const newServiceApi = new ApiService(baseUrl);
+
+const useGetNotes = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const noteState = useSelector((state: any) => state.notes.notes);
+  const authNotes: [] = useSelector(
+    (state: any) => state.auth.authTokenState.notes
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(addNote(authNotes));
+  }, []);
+  return {
+    noteState,
+  };
+};
 
 const useLogin = () => {
   const dispatch = useDispatch();
@@ -17,8 +34,6 @@ const useLogin = () => {
       password,
     });
     const userData: any = await newServiceApi.getDataUser("user", data.token);
-    console.log("fin");
-    console.log(userData);
     dispatch(authUser({ ...userData, token: data.token }));
   };
 
@@ -44,7 +59,6 @@ const useCreateUser = () => {
       alert("El usuario ya existe");
       return;
     }
-    console.log(data);
     dispatch(authUser({ ...data.result, token: data.token }));
   };
   return {
@@ -52,4 +66,4 @@ const useCreateUser = () => {
   };
 };
 
-export { useLogin, useCreateUser };
+export { useLogin, useCreateUser, useGetNotes };

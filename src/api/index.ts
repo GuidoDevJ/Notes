@@ -22,6 +22,7 @@ class ApiService {
     }
   }
 
+
   public async authUser(url:string,obj:object){
     try {
         console.log("entrando")
