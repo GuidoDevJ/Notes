@@ -37,13 +37,14 @@ class ApiService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async post<T>(url: string, data: any): Promise<T> {
+  public async CreateUser<T>(url: string, data: any): Promise<T> {
+    console.log(data)
     try {
-      const response = await axios.post(`${this.baseUrl}${url}`, data);
+      const response = await axios.post(`${this.baseUrl}${url}`, {...data});
+      // console.log(response)
       return response.data;
-    } catch (error) {
-      console.error(error);
-      throw error;
+    } catch (error:any) {
+      return error.response.data
     }
   }
 
