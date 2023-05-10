@@ -1,5 +1,16 @@
 import { ReactNode } from "react";
-export default interface ILayout {
+ interface ILayout {
   pageInfo?: { name: string; description: string };
   children: ReactNode;
+}
+interface User{
+  email:string,
+  password:string,
+  id:number,
+  notes:[]
+} 
+
+export type {
+  ILayout,
+  User
 }
