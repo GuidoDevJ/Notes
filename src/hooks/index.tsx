@@ -3,25 +3,30 @@ import { ApiService } from "../api/index";
 import { authUser } from "../redux/slices/auth/index";
 import { useEffect } from "react";
 import { addNote } from "../redux/slices/notes/notesSlice";
+import { setItem } from "../helpers/localStorage";
 
 const baseUrl = "https://backend-notes-liart.vercel.app/";
 const newServiceApi = new ApiService(baseUrl);
 
 const useGetNotes = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const noteState = useSelector((state: any) => state.notes.notes);
-  const authNotes: [] = useSelector(
-    (state: any) => state.auth.authTokenState.notes
-  );
-  const dispatch = useDispatch();
+  const noteState = useSelector((state: any) => state.notes);
   useEffect(() => {
-    dispatch(addNote(authNotes));
-  }, []);
+    console.log("cambio el state global", noteState);
+    setItem("notes", noteState);
+  }, [noteState]);
   return {
-    noteState,
+    noteState: noteState,
   };
 };
-
+const useUpdate = () => {
+  const updateNoteById = async (id: string, content: string) => {
+    return await newServiceApi.updateDataNoteById("update", id, content);
+  };
+  return {
+    updateNoteById,
+  };
+};
 const useLogin = () => {
   const dispatch = useDispatch();
   const handlerSubmit = async (e: Event) => {
@@ -34,6 +39,8 @@ const useLogin = () => {
       password,
     });
     const userData: any = await newServiceApi.getDataUser("user", data.token);
+    setItem("notes", { notes: userData.notes });
+    dispatch(addNote(userData.notes));
     dispatch(authUser({ ...userData, token: data.token }));
   };
 
@@ -66,4 +73,4 @@ const useCreateUser = () => {
   };
 };
 
-export { useLogin, useCreateUser, useGetNotes };
+export { useLogin, useCreateUser, useGetNotes, useUpdate };

@@ -49,7 +49,18 @@ class ApiService {
     }
   }
 
-
+  public async updateDataNoteById<T>(url:string,id:string,content:string):Promise<T>{
+    try {
+      console.log("entrando")
+    const response = await axios.patch(`${this.baseUrl}${url}/${id}`,{
+      content
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+  }
 
   // otros métodos de solicitud HTTP como PUT, DELETE, etc.
 }

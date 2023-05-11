@@ -1,24 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getItem } from "../../../helpers/localStorage";
 
-// const initialState:;
+const initialState = getItem("notes") || { notes: [] };
 
 const notesSlice = createSlice({
   name: "notes",
-  initialState: {
-    notes: [],
-  },
+  initialState,
   reducers: {
     addNote: (state, action) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      console.log("entrando");
+      console.log(action.payload);
       state.notes = action.payload;
+      console.log("state.notes", state);
     },
     updateNote: (state, action) => {
-      const { id, title, content } = action.payload;
+      const { id, content } = action.payload;
+      console.log(id, content);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const foundNote: any = state.notes.find((note: any) => note.id === id);
+      console.log(foundNote);
       if (foundNote) {
-        foundNote.title = title;
         foundNote.content = content;
+        console.log(foundNote.content);
+        console.log("inital state desde update", initialState);
+        // setItem("notes", { notes: initialState });
       }
     },
   },
@@ -27,4 +32,4 @@ const notesSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { addNote, updateNote } = notesSlice.actions;
 
-export default notesSlice;
+export default notesSlice.reducer;

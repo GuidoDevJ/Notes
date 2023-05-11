@@ -11,7 +11,6 @@ const persisConfig = {
   storage,
   whiteList: ["token"],
 };
-
 const rootReducer = combineReducers({
   authTokenState: authSlice.reducer,
 });
@@ -21,7 +20,7 @@ const persistedReducer = persistReducer(persisConfig, rootReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    notes: notesSlice.reducer,
+    notes: notesSlice,
   },
   middleware: [thunk],
 });
