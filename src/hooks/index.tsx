@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import { ApiService } from "../api/index";
 import { authUser } from "../redux/slices/auth/index";
 import { useEffect } from "react";
 import { addNote } from "../redux/slices/notes/notesSlice";
-import { setItem } from "../helpers/localStorage";
+import { getItem, setItem } from "../helpers/localStorage";
 
 const baseUrl = "https://backend-notes-liart.vercel.app/";
 const newServiceApi = new ApiService(baseUrl);
@@ -12,13 +13,13 @@ const useGetNotes = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const noteState = useSelector((state: any) => state.notes);
   useEffect(() => {
-    console.log("cambio el state global", noteState);
     setItem("notes", noteState);
   }, [noteState]);
   return {
-    noteState: noteState,
+    noteState,
   };
 };
+
 const useUpdate = () => {
   const updateNoteById = async (id: string, content: string) => {
     return await newServiceApi.updateDataNoteById("update", id, content);
@@ -40,7 +41,7 @@ const useLogin = () => {
     });
     const userData: any = await newServiceApi.getDataUser("user", data.token);
     setItem("notes", { notes: userData.notes });
-    dispatch(addNote(userData.notes));
+    dispatch(addNote(...userData.notes ));
     dispatch(authUser({ ...userData, token: data.token }));
   };
 
@@ -73,4 +74,52 @@ const useCreateUser = () => {
   };
 };
 
-export { useLogin, useCreateUser, useGetNotes, useUpdate };
+const useCreateNotes = () => {
+  const auth = useSelector((state: any) => state.auth);
+  const noteState = useSelector((state: any) => state.notes);
+  const dispatch = useDispatch()
+  const token = auth.authTokenState.token
+  const noteCreate = async (e: Event,fn?:any) => {
+    e.preventDefault();
+    const target = e.target as any;
+    const title = target.title.value;
+    const content = target.text.value;
+    const res = await newServiceApi.createNote("create/note", {
+      title,
+      content,
+    },token);
+    const {data,status} = res
+    console.log("res========>",status);
+    if(status === undefined){
+      alert("Lo siento algo fallo en nuestros servidores, intente nuevamente")
+      fn()
+    }
+    if(status === 200){
+      fn()
+      alert("Felicidades su nota fue publicada")
+      console.log(noteState)
+      dispatch(addNote({
+        title,
+        content,
+      }))
+      console.log(noteState)
+      setItem("notes",noteState)
+    }
+    // notes.push( {
+    //   title,
+    //   content,
+    // })
+    // setItem("notes",notes)
+    // if(res){
+      
+    //   if(fn){
+    //     fn()
+    //   }
+    // }
+  };
+  return {
+    noteCreate,
+  };
+};
+
+export { useLogin, useCreateUser, useGetNotes, useUpdate, useCreateNotes };

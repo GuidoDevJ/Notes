@@ -10,7 +10,7 @@ const notesSlice = createSlice({
     addNote: (state, action) => {
       console.log("entrando");
       console.log(action.payload);
-      state.notes = action.payload;
+      state.notes = [...state.notes,action.payload];
       console.log("state.notes", state);
     },
     updateNote: (state, action) => {
