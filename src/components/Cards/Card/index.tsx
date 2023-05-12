@@ -4,8 +4,8 @@ import { Button } from "../../../ui/Bottons/index";
 import { useState } from "react";
 import style from "./style.module.css";
 import { useDispatch } from "react-redux";
-import { updateNote } from "../../../redux/slices/notes/notesSlice";
-import { useUpdate } from "../../../hooks/index";
+import { updateNote, deleteNot } from "../../../redux/slices/notes/notesSlice";
+import { useDeleteNote, useUpdate } from "../../../hooks/index";
 interface Card {
   title: string;
   text: string;
@@ -16,6 +16,7 @@ const CardForm = ({ title, text, id }: Card) => {
   const [edit, setEdit] = useState(false);
   const [textArea, setTextArea] = useState(text);
   const { updateNoteById } = useUpdate();
+  const { deleteNote } = useDeleteNote();
   const dispatch = useDispatch();
   function setEditStatus(e: Event) {
     e.preventDefault();
@@ -28,6 +29,11 @@ const CardForm = ({ title, text, id }: Card) => {
     }
   }
 
+  // function deleteNote(e: Event) {
+  //   e.preventDefault();
+  //   dispatch(deleteNot(id));
+  //   console.log("delete");
+  // }
   const handlerTextArea = (e: Event) => {
     const target = e.target as any;
     if (edit) {
@@ -55,7 +61,7 @@ const CardForm = ({ title, text, id }: Card) => {
     ) : (
       <>
         <Button fn={setEditStatus}>Editar</Button>
-        <Button>Eliminar</Button>
+        <Button fn={(e: any) => deleteNote(e, id)}>Eliminar</Button>
       </>
     );
   }

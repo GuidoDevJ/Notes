@@ -1,7 +1,13 @@
 import style from "./style.module.css";
 import { Title } from "../../ui/Text";
+import { ILayout } from "src/interfaces";
 
-const FormLogin = ({ fn, title, children }: any) => {
+interface FormInterface extends ILayout {
+  fn?: () => any;
+  title: string;
+}
+
+const FormLogin = ({ fn, title, children }: FormInterface) => {
   return (
     <div className={style.container}>
       <Title>{title}</Title>

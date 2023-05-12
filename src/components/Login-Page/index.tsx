@@ -4,7 +4,7 @@ import { Button } from "../../ui/Bottons/index";
 import { useLogin } from "../../hooks/index";
 import { TextLarge } from "../../ui/Text";
 import { NavLink } from "react-router-dom";
-
+import style from "./style.module.css";
 const LoginPage = () => {
   const { handlerSubmit } = useLogin();
 

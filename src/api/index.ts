@@ -68,6 +68,26 @@ class ApiService {
       throw error;
     }
   }
+  public async deleteNoteById<T>(
+    url: string,
+    id: string,
+    token:string
+  ): Promise<T> {
+    try {
+      console.log("entrando");
+      const response = await axios.delete(`${this.baseUrl}${url}/${id}`,{
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  
 
   public async createNote(url: string, data: DataNote, token: string) {
     try {

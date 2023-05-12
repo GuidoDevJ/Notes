@@ -8,9 +8,8 @@ const notesSlice = createSlice({
   initialState,
   reducers: {
     addNote: (state, action) => {
-      console.log("entrando");
       console.log(action.payload);
-      state.notes = [...state.notes,action.payload];
+      state.notes = [...state.notes, ...action.payload];
       console.log("state.notes", state);
     },
     updateNote: (state, action) => {
@@ -26,10 +25,16 @@ const notesSlice = createSlice({
         // setItem("notes", { notes: initialState });
       }
     },
+    deleteNot: (state, action) => {
+      const id = action.payload;
+      console.log("entrando en el delete", id);
+      state.notes = state.notes.filter((note: any) => note.id !== id);
+      console.log(state.notes);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addNote, updateNote } = notesSlice.actions;
+export const { addNote, updateNote, deleteNot } = notesSlice.actions;
 
 export default notesSlice.reducer;
