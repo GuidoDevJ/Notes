@@ -5,6 +5,7 @@ import { authUser } from "../redux/slices/auth/index";
 import { useEffect } from "react";
 import { addNote, deleteNot } from "../redux/slices/notes/notesSlice";
 import { getItem, setItem } from "../helpers/localStorage";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const baseUrl = "https://backend-notes-six.vercel.app/";
 const newServiceApi = new ApiService(baseUrl);
@@ -137,6 +138,27 @@ const useCreateNotes = () => {
   };
 };
 
+const useUpdateDataUser=()=>{
+  const navigate = useNavigate();
+
+  const auth = useSelector((state: any) => state.auth);
+  const updataDataUser=async(e:Event)=>{
+    e.preventDefault();
+  const token = auth.authTokenState.token;
+    const target = e.target as any;
+    const name = target.nombre.value;
+    const password = target.password.value;
+const response = await newServiceApi.updateDataUser("user/update",{name,password},token)
+  if(response.status === 200){
+    alert("Super sus datos han sido modificados")
+    navigate("/notes")
+  }
+  }
+  return {
+    updataDataUser
+  }
+}
+
 export {
   useLogin,
   useCreateUser,
@@ -144,4 +166,5 @@ export {
   useUpdate,
   useCreateNotes,
   useDeleteNote,
+  useUpdateDataUser
 };

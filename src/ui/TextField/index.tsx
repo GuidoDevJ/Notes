@@ -6,7 +6,7 @@ interface Input {
   change?: () => any;
 }
 
-const TextField = ({ name, text, value, change = () => any }: Input) => {
+const TextField = ({ name, text, value, change}: Input) => {
   return (
     <div className={style.container}>
       <label htmlFor={name} className={style.label}>

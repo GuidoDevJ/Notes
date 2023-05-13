@@ -5,6 +5,7 @@ import { Navigate, Outlet } from "react-router-dom";
 const PrivateRoute = ({ children }: any) => {
   const authToken = useSelector((state: any) => state.auth.authTokenState);
   const token = authToken?.token;
+  console.log("token",token)
 
   if (!token) {
     return <Navigate to={"/"} />;

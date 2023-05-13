@@ -101,6 +101,18 @@ class ApiService {
       return error;
     }
   }
+  public async updateDataUser(url: string, data:any, token: string) {
+    try {
+      const response = await axios.patch(`${this.baseUrl}${url}`, data, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      return {data:response.data,status:response.status};
+    } catch (error: any) {
+      return error;
+    }
+  }
 
   // otros métodos de solicitud HTTP como PUT, DELETE, etc.
 }

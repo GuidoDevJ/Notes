@@ -4,19 +4,14 @@ import { MainLayout } from "../Layout";
 import { Button } from "../../ui/Bottons/index";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useUpdateDataUser } from "../../hooks/index";
 
 const About = () => {
+  const {updataDataUser} = useUpdateDataUser()
   const auth = useSelector((state: any) => state.auth.authTokenState);
   const name = auth.name;
   const [nombre, setName] = useState(name);
   console.log(auth);
-  function handlerSubmit(e: Event) {
-    e.preventDefault();
-    const target = e.target as any;
-    const name = target.nombre.value;
-    const password = target.password.value;
-    console.log({ name, password });
-  }
   function changeValue(e: Event) {
     const target = e.target as any;
     const name = target.name.value;
@@ -25,7 +20,7 @@ const About = () => {
   return (
     <>
       <MainLayout>
-        <FormLogin title="About You" fn={handlerSubmit}>
+        <FormLogin title="About You" fn={updataDataUser}>
           <TextField
             name="nombre"
             text="Nombre"

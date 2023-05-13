@@ -9,7 +9,7 @@ import notesSlice from "../slices/notes/notesSlice";
 const persisConfig = {
   key: "root",
   storage,
-  whiteList: ["token"],
+  whiteList: ["token","name"],
 };
 const rootReducer = combineReducers({
   authTokenState: authSlice.reducer,
