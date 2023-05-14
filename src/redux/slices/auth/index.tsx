@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { RootState } from '../../store/index'
 
 // const initialState:;
 
@@ -28,11 +29,17 @@ const authSlice = createSlice({
     },
     deleteAuth:(state)=>{
       state.token = ""
+      state.email =""
+      state.id=0
+      state.notes=[]
+      state.password=""
+      state.name=""
+
     }
   },
 });
 
 // Action creators are generated for each case reducer function
 export const { authUser,updateData,deleteAuth } = authSlice.actions;
-
+export const auth = (state: RootState) => state
 export default authSlice;

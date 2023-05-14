@@ -1,15 +1,13 @@
 import { CustomLink } from "../../ui/Link";
 import style from "./style.module.css";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deleteAuth } from "../../redux/slices/auth/index";
 
 const Header = () => {
   const dispatch = useDispatch()
-  const logOut=(e:Event)=>{
-    e.preventDefault()
-    localStorage.clear()
+  const logOut=()=>{
     dispatch(deleteAuth())
+    localStorage.clear()
   }
 
   return (
@@ -21,7 +19,7 @@ const Header = () => {
         <ul>
           <CustomLink style={style} path="/about" text="About" />
           <CustomLink style={style} path="/" text="Notes" />
-          <button className={style["button-36"]} role="button" onClick={(e:any)=>logOut(e)}>LogOut</button>
+          <button className={style["button-36"]} role="button" onClick={logOut}>LogOut</button>
         </ul>
       </div>
     </header>
