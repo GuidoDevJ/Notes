@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useDispatch, useSelector } from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { ApiService } from "../api/index";
 import { authUser } from "../redux/slices/auth/index";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { addNote, deleteNot } from "../redux/slices/notes/notesSlice";
 import { setItem } from "../helpers/localStorage";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../redux/store/index";
 
 const baseUrl = "https://backend-notes-six.vercel.app/";
 const newServiceApi = new ApiService(baseUrl);
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
 
 const useGetNotes = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,14 +24,29 @@ const useGetNotes = () => {
   };
 };
 
-const useUpdate = () => {
+
+const useCard=()=>{
+  const dispatch = useDispatch();
+  const auth = useSelector((state: any) => state.auth);
+  const token = auth.authTokenState.token;
+
+  const deleteNote = async (e: ChangeEvent<HTMLInputElement>, id: string) => {
+    e.preventDefault();
+    const res: any = await newServiceApi.deleteNoteById("delete", id, token);
+    dispatch(deleteNot(id));
+    alert("Eliminado");
+  };
   const updateNoteById = async (id: string, content: string) => {
     return await newServiceApi.updateDataNoteById("update", id, content);
   };
+  
+  
   return {
     updateNoteById,
+    deleteNote
   };
-};
+
+}
 const useLogin = () => {
   const dispatch = useDispatch();
   const handlerSubmit = async (e: Event) => {
@@ -74,22 +92,6 @@ const useCreateUser = () => {
   };
   return {
     handlerSubmit,
-  };
-};
-
-const useDeleteNote = () => {
-  const dispatch = useDispatch();
-  const auth = useSelector((state: any) => state.auth);
-  const token = auth.authTokenState.token;
-
-  const deleteNote = async (e: Event, id: string) => {
-    e.preventDefault();
-    const res: any = await newServiceApi.deleteNoteById("delete", id, token);
-    dispatch(deleteNot(id));
-    alert("Eliminado");
-  };
-  return {
-    deleteNote,
   };
 };
 
@@ -167,8 +169,7 @@ export {
   useLogin,
   useCreateUser,
   useGetNotes,
-  useUpdate,
   useCreateNotes,
-  useDeleteNote,
   useUpdateDataUser,
+  useCard
 };

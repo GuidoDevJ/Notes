@@ -1,9 +1,10 @@
+import { ChangeEvent } from "react";
 import style from "./style.module.css";
 interface Input {
   name: string;
   text: string;
   value?: string;
-  change?: () => any;
+  change?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextField = ({ name, text, value, change}: Input) => {
@@ -18,7 +19,7 @@ const TextField = ({ name, text, value, change}: Input) => {
         name={name}
         className={style.field}
         value={value}
-        onChange={(e) => change(e)}
+        onChange={change}
       />
     </div>
   );

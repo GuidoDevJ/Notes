@@ -6,7 +6,7 @@ import styles from "./button.module.css";
 const Button = ({ children, fn }: any) => {
   return (
     <>
-      <button className={styles.button} onClick={(e: any) => fn(e)}>
+      <button className={styles.button} onClick={fn}>
         <Text>{children}</Text>
       </button>
     </>

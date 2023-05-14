@@ -1,11 +1,12 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { ChangeEvent } from "react";
 import { TextLarge, Title } from "../../../ui/Text";
 import { Button } from "../../../ui/Bottons/index";
 import { useState } from "react";
 import style from "./style.module.css";
 import { useDispatch } from "react-redux";
-import { updateNote, deleteNot } from "../../../redux/slices/notes/notesSlice";
-import { useDeleteNote, useUpdate } from "../../../hooks/index";
+import { updateNote } from "../../../redux/slices/notes/notesSlice";
+import { useCard,} from "../../../hooks/index";
 interface Card {
   title: string;
   text: string;
@@ -15,9 +16,9 @@ interface Card {
 const CardForm = ({ title, text, id }: Card) => {
   const [edit, setEdit] = useState(false);
   const [textArea, setTextArea] = useState(text);
-  const { updateNoteById } = useUpdate();
-  const { deleteNote } = useDeleteNote();
+  const {updateNoteById,deleteNote} = useCard()
   const dispatch = useDispatch();
+  
   function setEditStatus(e: Event) {
     e.preventDefault();
     if (edit) {
@@ -28,20 +29,14 @@ const CardForm = ({ title, text, id }: Card) => {
       setEdit(true);
     }
   }
-
-  // function deleteNote(e: Event) {
-  //   e.preventDefault();
-  //   dispatch(deleteNot(id));
-  //   console.log("delete");
-  // }
-  const handlerTextArea = (e: Event) => {
+  const handlerTextArea = (e:ChangeEvent<HTMLInputElement>) => {
     const target = e.target as any;
     if (edit) {
       setTextArea(target.value);
     }
   };
 
-  const confirmEdit = async (e: Event) => {
+  const confirmEdit = async (e:Event) => {
     e.preventDefault();
     const target = e.target as any;
     const noteNameData = target.noteName.value;
@@ -61,7 +56,7 @@ const CardForm = ({ title, text, id }: Card) => {
     ) : (
       <>
         <Button fn={setEditStatus}>Editar</Button>
-        <Button fn={(e: any) => deleteNote(e, id)}>Eliminar</Button>
+        <Button fn={(e:ChangeEvent<HTMLInputElement>) => deleteNote(e, id)}>Eliminar</Button>
       </>
     );
   }

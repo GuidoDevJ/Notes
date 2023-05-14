@@ -16,9 +16,9 @@ class ApiService {
     this.baseUrl = baseUrl;
   }
   // Get Data User
+
   public async getDataUser<T>(url: string, token: string): Promise<T> {
     try {
-      console.log("entrando");
       const response = await axios.get(`${this.baseUrl}${url}`, {
         headers: {
           Authorization: `bearer ${token}`,
@@ -26,34 +26,38 @@ class ApiService {
       });
       return response.data;
     } catch (error) {
-      console.error(error);
+      // DO ====> Colocar la notificacion de error
+      console.log(error);
       throw error;
     }
   }
+
   // Auth User
   public async authUser(url: string, obj: object) {
     try {
-      console.log("entrando");
       const response = await axios.post(`${this.baseUrl}${url}`, {
         ...obj,
       });
       return response.data;
     } catch (error) {
+      // DO ====> Colocar la notificacion de error
       console.error(error);
       throw error;
     }
   }
 
   // Create User
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async CreateUser<T>(url: string, data: any): Promise<T> {
-    console.log(data);
     try {
       const response = await axios.post(`${this.baseUrl}${url}`, { ...data });
       // console.log(response)
       return response.data;
+      // DO ====> Tipar Error
+
     } catch (error: any) {
+      // DO ====> Colocar la notificacion de error
+
       return error.response.data;
     }
   }
@@ -66,12 +70,13 @@ class ApiService {
     content: string
   ): Promise<T> {
     try {
-      console.log("entrando");
       const response = await axios.patch(`${this.baseUrl}${url}/${id}`, {
         content,
       });
       return response.data;
     } catch (error) {
+      // DO ====> Colocar la notificacion de error
+
       console.error(error);
       throw error;
     }
@@ -83,7 +88,6 @@ class ApiService {
     token: string
   ): Promise<T> {
     try {
-      console.log("entrando");
       const response = await axios.delete(`${this.baseUrl}${url}/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
@@ -91,6 +95,8 @@ class ApiService {
       });
       return response.data;
     } catch (error) {
+      // DO ====> Colocar la notificacion de error
+
       console.error(error);
       throw error;
     }
@@ -105,7 +111,11 @@ class ApiService {
         },
       });
       return { data: response.data, status: response.status };
+      // DO ====> Tipar el any
+
     } catch (error: any) {
+      // DO ====> Colocar la notificacion de error
+
       return error;
     }
   }
@@ -118,6 +128,7 @@ class ApiService {
         },
       });
       return { data: response.data, status: response.status };
+      // DO ====> Tipar el any
     } catch (error: any) {
       return error;
     }
