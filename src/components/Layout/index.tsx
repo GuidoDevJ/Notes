@@ -6,7 +6,6 @@ const DivMain = styled.div`
   width: 80%;
   margin: 0 auto;
   text-align: center;
-  /* height: auto; */
 `;
 
 const MainLayout = ({ children }: ILayout) => {

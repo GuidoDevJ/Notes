@@ -5,7 +5,6 @@ import { useLogin } from "../../hooks/index";
 import { TextLarge } from "../../ui/Text";
 import { NavLink } from "react-router-dom";
 const LoginPage = () => {
-  console.log("entre a login page")
   const { handlerSubmit } = useLogin();
 
   return (
