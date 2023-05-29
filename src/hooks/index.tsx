@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { ApiService } from "../api/index";
@@ -8,10 +9,9 @@ import { setItem } from "../helpers/localStorage";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/store/index";
 
-const baseUrl = "https://backend-notes-six.vercel.app/";
+const baseUrl = "https://notes-back.vercel.app/";
 const newServiceApi = new ApiService(baseUrl);
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 const useGetNotes = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,29 +24,26 @@ const useGetNotes = () => {
   };
 };
 
-
-const useCard=()=>{
+const useCard = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state: any) => state.auth);
   const token = auth.authTokenState.token;
 
   const deleteNote = async (e: ChangeEvent<HTMLInputElement>, id: string) => {
     e.preventDefault();
-    const res: any = await newServiceApi.deleteNoteById("delete", id, token);
+    await newServiceApi.deleteNoteById("delete", id, token);
     dispatch(deleteNot(id));
     alert("Eliminado");
   };
   const updateNoteById = async (id: string, content: string) => {
     return await newServiceApi.updateDataNoteById("update", id, content);
   };
-  
-  
+
   return {
     updateNoteById,
-    deleteNote
+    deleteNote,
   };
-
-}
+};
 const useLogin = () => {
   const dispatch = useDispatch();
   const handlerSubmit = async (e: Event) => {
@@ -113,7 +110,7 @@ const useCreateNotes = () => {
       },
       token
     );
-    const { data, status } = res;
+    const { status } = res;
     console.log("res========>", status);
     if (status === undefined) {
       alert("Lo siento algo fallo en nuestros servidores, intente nuevamente");
@@ -171,5 +168,5 @@ export {
   useGetNotes,
   useCreateNotes,
   useUpdateDataUser,
-  useCard
+  useCard,
 };

@@ -42,6 +42,7 @@ class ApiService {
     } catch (error) {
       // DO ====> Colocar la notificacion de error
       console.error(error);
+      alert("Contraseña incorrecta")
       throw error;
     }
   }
