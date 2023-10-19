@@ -5,8 +5,10 @@ pipeline{
             steps {
                 sh 'echo ${GIT_BRANCH}'
             }
+        }
+        stage('checkout') { 
             steps {
-                sh 'git pull origin ${GIT_BRANCH}'
+                sh 'echo git pull origin ${GIT_BRANCH}'
             }
         }
         stage("Build") {
