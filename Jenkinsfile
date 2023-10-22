@@ -13,12 +13,12 @@ pipeline{
         }
         stage("Build") {
             steps {
-                sh 'npm install'
+                sh 'docker build -t notes:latest .'
             }
         }
         stage("Deploy") {
             steps {
-                sh 'npm run dev'
+                sh 'docker compose up -d notes'
             }
         }
         stage('Done'){
